@@ -83,8 +83,15 @@ function showToast(msg) {
   setTimeout(() => toast.classList.remove("show"), 2600);
 }
 
+// ---- Email assemblé au runtime (anti-scraping : pas d'adresse en clair dans le code) ----
+const FORM_EMAIL = ["davidiazoulay", ["gmail", "com"].join(".")].join("@");
+// Remplit les liens email pour les humains, sans exposer l'adresse aux robots
+$$("[data-mail]").forEach((a) => {
+  a.href = "mailto:" + FORM_EMAIL;
+  if (a.hasAttribute("data-mail-show")) a.textContent = FORM_EMAIL;
+});
+
 // ---- Formulaire de contact (FormSubmit AJAX + honeypot anti-spam) ----
-const FORM_EMAIL = "davidiazoulay@gmail.com";
 const form = $("#contact-form");
 const status = $("#form-status");
 const sendBtn = $("#send-btn");
