@@ -1,101 +1,272 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <!-- Encodage pour afficher correctement les accents -->
-    <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>David Azoulay — Portfolio</title>
+  <meta name="description" content="David Azoulay, étudiant ingénieur à l'ECE Lyon (Transformation Digitale & Innovation). Portfolio web, projets et recherche d'alternance pour septembre 2026." />
 
-    <!-- Permet au site d’être responsive (adapté mobile) -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="David Azoulay — Portfolio" />
+  <meta property="og:description" content="Étudiant ingénieur ECE Lyon. Projets web & tech. En recherche d'alternance — transformation digitale & innovation." />
+  <meta property="og:type" content="website" />
 
-    <!-- Titre de la page dans l’onglet -->
-    <title>Accueil - Mon univers numérique</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 
-    <!-- Lien vers le fichier CSS (v=999 évite le cache navigateur) -->
-    <link rel="stylesheet" href="style.css?v=999">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+    }
+  }
+  </script>
 </head>
-
 <body>
+  <!-- Fond 3D de particules (réactif à la souris) -->
+  <canvas id="bg-canvas"></canvas>
+  <div class="bg-overlay"></div>
 
-<!-- ===== HEADER ===== -->
-<header class="hero">
+  <!-- Curseur lumineux personnalisé -->
+  <div class="cursor" id="cursor"></div>
 
-    <!-- SLIDER d’images en arrière-plan -->
-    <div class="slider">
-        <img src="bg1.jpg"> <!-- première image -->
-        <img src="bg2.jpg"> <!-- deuxième image -->
-        <img src="bg3.jpg"> <!-- troisième image -->
+  <!-- ===== NAV ===== -->
+  <header class="nav" id="nav">
+    <a href="#hero" class="nav__logo">DA<span>.</span></a>
+    <nav class="nav__links" id="navlinks">
+      <a href="#apropos">Profil</a>
+      <a href="#parcours">Parcours</a>
+      <a href="#competences">Compétences</a>
+      <a href="#projets">Projets</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="cv-david-azoulay.pdf" download class="btn btn--sm">↓ CV</a>
+    <button class="nav__burger" id="burger" aria-label="Menu">☰</button>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="hero">
+    <div class="hero__inner reveal">
+      <span class="badge">🔎 En recherche d'alternance · Rentrée 2026</span>
+      <h1 class="hero__title">David <span class="grad">Azoulay</span></h1>
+      <p class="hero__role">Étudiant ingénieur · ECE Lyon — Transformation Digitale &amp; Innovation</p>
+      <p class="hero__pitch">
+        Je conçois des projets web et tech de A à Z, surtout pour le plaisir de voir
+        une idée tourner pour de vrai. Maintenant, je veux le faire en entreprise.
+      </p>
+      <div class="hero__cta">
+        <a href="#projets" class="btn btn--primary magnetic">Voir mes projets</a>
+        <a href="#contact" class="btn btn--ghost magnetic">Me contacter</a>
+      </div>
+      <div class="hero__socials">
+        <a href="https://www.linkedin.com/in/david-azoulay-41732032b" target="_blank" rel="noopener">LinkedIn</a>
+        <span>·</span>
+        <a href="https://github.com/Dav0426" target="_blank" rel="noopener">GitHub</a>
+        <span>·</span>
+        <a href="mailto:davidiazoulay@gmail.com">Email</a>
+      </div>
+    </div>
+    <a href="#apropos" class="scroll-cue" aria-label="Défiler"><span></span></a>
+  </section>
+
+  <!-- ===== À PROPOS ===== -->
+  <section class="section" id="apropos">
+    <div class="section__head reveal">
+      <span class="section__num">01</span>
+      <h2>Profil</h2>
+    </div>
+    <div class="apropos">
+      <div class="glass apropos__text reveal">
+        <p>
+          Je suis en deuxième année du cycle préparatoire intégré à l'ECE Lyon, et je rejoins
+          à la rentrée la majeure <strong>Transformation Digitale &amp; Innovation</strong>.
+          Ce qui me motive, c'est de partir d'une idée et d'aller jusqu'au projet qui fonctionne :
+          un site, un jeu, un objet connecté.
+        </p>
+        <p>
+          En dehors des cours, je passe pas mal de temps à coder mes propres projets pour tester
+          des choses et apprendre vite. Je cherche aujourd'hui une alternance où je pourrai être
+          utile sur de vrais sujets, monter en compétence au contact d'une équipe, et m'impliquer
+          à fond.
+        </p>
+      </div>
+      <div class="apropos__facts">
+        <div class="glass fact reveal"><span class="fact__ico">📍</span><div><strong>Lyon &amp; alentours</strong><small>Véhiculé</small></div></div>
+        <div class="glass fact reveal"><span class="fact__ico">🎓</span><div><strong>ECE Lyon</strong><small>Cycle ingénieur</small></div></div>
+        <div class="glass fact reveal"><span class="fact__ico">🗣️</span><div><strong>Anglais B1</strong><small>Intermédiaire</small></div></div>
+        <div class="glass fact reveal"><span class="fact__ico">📅</span><div><strong>Dispo sept. 2026</strong><small>Alternance</small></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PARCOURS ===== -->
+  <section class="section" id="parcours">
+    <div class="section__head reveal">
+      <span class="section__num">02</span>
+      <h2>Parcours &amp; expériences</h2>
+    </div>
+    <div class="timeline">
+      <div class="glass tl-item reveal">
+        <span class="tl-date">2023 → 2026</span>
+        <h3>Cycle préparatoire intégré — ECE Lyon</h3>
+        <p>Formation d'ingénieur généraliste (informatique, électronique, mathématiques, programmation). Spécialisation à venir : Transformation Digitale &amp; Innovation.</p>
+      </div>
+      <div class="glass tl-item reveal">
+        <span class="tl-date">Stage · ~1,5 mois</span>
+        <h3>Tâches informatiques — Yaldei Perla (centre de gestion de crèches)</h3>
+        <ul>
+          <li>Appui informatique au quotidien de l'équipe administrative.</li>
+          <li>Mise en forme et organisation de données et de documents (tableurs, fichiers).</li>
+          <li>Résolution de petits problèmes informatiques et bureautiques courants.</li>
+        </ul>
+      </div>
+      <div class="glass tl-item reveal">
+        <span class="tl-date">Engagement</span>
+        <h3>Bénévolat associatif</h3>
+        <p>Heures de bénévolat déclarées. <em>(détails à compléter)</em></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COMPÉTENCES ===== -->
+  <section class="section" id="competences">
+    <div class="section__head reveal">
+      <span class="section__num">03</span>
+      <h2>Compétences</h2>
+    </div>
+    <div class="skills">
+      <div class="glass skill-card reveal" data-tilt>
+        <h3>💻 Développement web</h3>
+        <div class="chips">
+          <span>HTML</span><span>CSS</span><span>JavaScript</span><span>jQuery</span>
+          <span>Tailwind</span><span>Responsive</span><span class="soft">Three.js (découverte)</span>
+        </div>
+      </div>
+      <div class="glass skill-card reveal" data-tilt>
+        <h3>⚙️ Programmation</h3>
+        <div class="chips">
+          <span>C</span><span>Java (POO)</span><span>Algorithmique</span>
+          <span>Structures de données</span><span>Théorie des graphes</span>
+        </div>
+      </div>
+      <div class="glass skill-card reveal" data-tilt>
+        <h3>🗄️ Données &amp; back-end</h3>
+        <div class="chips">
+          <span>SQL</span><span class="soft">PHP / MySQL (notions)</span>
+        </div>
+      </div>
+      <div class="glass skill-card reveal" data-tilt>
+        <h3>🔌 Électronique &amp; embarqué</h3>
+        <div class="chips">
+          <span>Arduino</span><span>Capteurs</span><span class="soft">Quartus / VHDL (notions)</span>
+        </div>
+      </div>
+      <div class="glass skill-card reveal" data-tilt>
+        <h3>🛠️ Outils &amp; méthodes</h3>
+        <div class="chips">
+          <span>Git / GitHub</span><span>Déploiement (Vercel)</span><span>VS Code</span><span>IA pour le dev</span>
+        </div>
+      </div>
+      <div class="glass skill-card reveal" data-tilt>
+        <h3>🤝 Soft skills</h3>
+        <div class="chips">
+          <span>Travail en équipe</span><span>Rigueur</span><span>Autonomie</span><span>Curiosité</span><span>Esprit d'analyse</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROJETS ===== -->
+  <section class="section" id="projets">
+    <div class="section__head reveal">
+      <span class="section__num">04</span>
+      <h2>Projets</h2>
     </div>
 
-    <!-- Bouton pour activer/désactiver le mode sombre -->
-    <div class="dark-toggle" onclick="toggleDarkMode()">🌙</div>
+    <!-- Featured (récents, démos en ligne) -->
+    <div class="projects-featured">
+      <article class="glass project project--feat reveal" data-tilt>
+        <div class="project__top"><span class="project__tag">Web interactif</span><span class="project__live">● en ligne</span></div>
+        <h3>Quiz « Quel innovateur digital es-tu ? »</h3>
+        <p>Test interactif (4 archétypes) avec carte de résultat animée et partageable. Pensé pour l'engagement LinkedIn.</p>
+        <div class="project__tech"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+        <a href="https://quiz-innovateur-digital.vercel.app" target="_blank" rel="noopener" class="project__link">Voir la démo →</a>
+      </article>
 
-    <!-- Contenu texte du header -->
-    <div class="hero-content">
-        <p class="mini-titre">DAVID AZOULAY</p> <!-- nom -->
-        <h1>Mon univers numérique</h1> <!-- titre principal -->
-        <p class="sous-titre">Portfolio et projets</p> <!-- sous-titre -->
+      <article class="glass project project--feat reveal" data-tilt>
+        <div class="project__top"><span class="project__tag">3D / WebGL</span><span class="project__live" id="exp3d-live">● en ligne</span></div>
+        <h3>Expérience 3D « Constellation »</h3>
+        <p>Sphère de 8000 particules animée par un shader, navigable à la souris, avec halo lumineux. Une expérience immersive dans le navigateur.</p>
+        <div class="project__tech"><span>Three.js</span><span>GLSL</span><span>WebGL</span></div>
+        <a href="https://experience-3d.vercel.app" target="_blank" rel="noopener" class="project__link" id="exp3d-link">Voir la démo →</a>
+      </article>
+
+      <article class="glass project project--feat reveal" data-tilt>
+        <div class="project__top"><span class="project__tag">Site immersif</span></div>
+        <h3>MARÉA</h3>
+        <p>Concept de site immersif autour d'un superyacht futuriste, avec vidéo pilotée au scroll. Projet personnel d'expérimentation visuelle.</p>
+        <div class="project__tech"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+      </article>
     </div>
 
-</header>
+    <!-- Académiques / techniques -->
+    <h3 class="projects-sub reveal">Projets techniques &amp; académiques</h3>
+    <div class="projects-grid">
+      <article class="glass project reveal" data-tilt><h4>Jeu Quoridor en C</h4><p>Jeu complet en C : déplacements, règles et logique algorithmique.</p><div class="project__tech"><span>C</span></div></article>
+      <article class="glass project reveal" data-tilt><h4>Réveil à capteur ultrason</h4><p>Réveil interactif piloté par un capteur à ultrasons sur Arduino.</p><div class="project__tech"><span>Arduino</span></div></article>
+      <article class="glass project reveal" data-tilt><h4>Deep Runner</h4><p>Jeu avec interface graphique et animations.</p><div class="project__tech"><span>C</span><span>Graphisme</span></div></article>
+      <article class="glass project reveal" data-tilt><h4>ECE Heroes</h4><p>Instrument de musique interactif via Arduino.</p><div class="project__tech"><span>Arduino</span></div></article>
+      <article class="glass project reveal" data-tilt><h4>Projet GPS</h4><p>Algorithmes de graphes pour calculer des trajets optimaux.</p><div class="project__tech"><span>Graphes</span><span>C</span></div></article>
+      <article class="glass project reveal" data-tilt><h4>Pac-Man sur Quartus</h4><p>Reproduction du jeu en logique matérielle (VHDL).</p><div class="project__tech"><span>Quartus</span><span>VHDL</span></div></article>
+      <article class="glass project reveal" data-tilt><h4>DrawBot</h4><p>Robot capable de dessiner automatiquement.</p><div class="project__tech"><span>Arduino</span><span>Électronique</span></div></article>
+      <article class="glass project reveal" data-tilt><h4>Site web dynamique</h4><p>Site complet avec espace connexion et base de données.</p><div class="project__tech"><span>PHP</span><span>MySQL</span></div></article>
+    </div>
+  </section>
 
-<!-- ===== MENU BURGER (mobile) ===== -->
-<div class="burger" id="burger">
-    ☰ <!-- icône burger -->
-</div>
+  <!-- ===== CONTACT ===== -->
+  <section class="section" id="contact">
+    <div class="section__head reveal">
+      <span class="section__num">05</span>
+      <h2>Contact</h2>
+    </div>
+    <div class="contact">
+      <div class="glass contact__info reveal">
+        <h3>Travaillons ensemble</h3>
+        <p>Je suis à la recherche d'une <strong>alternance en transformation digitale &amp; innovation</strong> pour la rentrée 2026. N'hésitez pas à m'écrire.</p>
+        <ul class="contact__list">
+          <li><span>✉️</span><a href="mailto:davidiazoulay@gmail.com">davidiazoulay@gmail.com</a></li>
+          <li><span>📱</span><a href="tel:+33766223767">07 66 22 37 67</a></li>
+          <li><span>📍</span>Lyon &amp; alentours (véhiculé)</li>
+          <li><span>💼</span><a href="https://www.linkedin.com/in/david-azoulay-41732032b" target="_blank" rel="noopener">linkedin.com/in/david-azoulay</a></li>
+          <li><span>🐙</span><a href="https://github.com/Dav0426" target="_blank" rel="noopener">github.com/Dav0426</a></li>
+        </ul>
+      </div>
 
-<!-- ===== MENU PRINCIPAL ===== -->
-<nav class="menu-principal" id="menu">
+      <form class="glass contact__form reveal" id="contact-form">
+        <div class="row">
+          <label>Nom<input type="text" name="name" placeholder="Votre nom" required /></label>
+          <label>Email<input type="email" name="email" placeholder="vous@email.com" required /></label>
+        </div>
+        <label>Sujet<input type="text" name="subject" placeholder="Objet du message" required /></label>
+        <label>Message<textarea name="message" rows="5" placeholder="Votre message…" required></textarea></label>
+        <!-- Honeypot anti-spam : invisible pour les humains, rempli par les bots -->
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+        <button type="submit" class="btn btn--primary" id="send-btn">Envoyer le message</button>
+        <p class="form-status" id="form-status"></p>
+      </form>
+    </div>
+  </section>
 
-    <!-- class actif = page actuelle -->
-    <a href="index.html" class="actif">Accueil</a>
+  <footer class="footer">
+    <span>© 2026 David Azoulay</span>
+    <span>Conçu avec Three.js · sans template</span>
+  </footer>
 
-    <a href="apropos.html">À propos</a>
-    <a href="competences.html">Compétences</a>
-    <a href="projets.html">Projets</a>
-    <a href="contact.html">Contact</a>
-    <a href="todo.html">Liste de tâches</a>
-    <a href="tailwind.html">Univers digital</a>
+  <div class="toast" id="toast"></div>
 
-</nav>
-
-<!-- ===== CONTENU PRINCIPAL ===== -->
-<main class="conteneur">
-
-    <!-- Carte avec animation (classe reveal) -->
-    <section class="carte reveal">
-
-        <h2>Bienvenue</h2>
-
-        <!-- Texte de présentation -->
-        <p>
-            Bienvenue sur mon site personnel. Vous y trouverez une présentation de mon parcours,
-            de mes compétences et des projets que j’ai réalisés au cours de ma formation.
-        </p>
-
-        <p>
-            Ce portfolio met en avant mon intérêt pour le développement web,
-            la transformation digitale et l’innovation.
-        </p>
-
-    </section>
-
-</main>
-
-<!-- ===== FOOTER ===== -->
-<footer class="footer">
-    <p>© 2026 - David Azoulay</p>
-</footer>
-
-<!-- ===== SCRIPTS ===== -->
-
-<!-- Import de jQuery (obligatoire avant jquery.js) -->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
-<!-- Script jQuery (menu burger, accordéon, carousel…) -->
-<script src="jquery.js"></script>
-
-<!-- Script animations (scroll + dark mode) -->
-<script src="animations.js"></script>
-
+  <script type="module" src="three-bg.js"></script>
+  <script src="main.js" defer></script>
 </body>
 </html>
