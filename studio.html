@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Digital Studio — Suite de transformation digitale · David Azoulay</title>
+<meta name="description" content="Digital Studio : 7 prototypes qui couvrent tout le cycle de la transformation digitale — de l'idée à l'adoption. Conçus par David Azoulay." />
+<meta property="og:title" content="Digital Studio — 7 prototypes de transformation digitale" />
+<meta property="og:description" content="De l'idée à l'adoption : une suite cohérente de 7 outils (innovation, voix client, données, IA, processus, parcours, changement)." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237c8bff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m12 3 1.9 4.8L19 9l-3.8 3 1 5.2L12 14.8 7.8 17.2l1-5.2L5 9l5.1-1.2z'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#070a16; --bg2:#0a0e1f; --surface:#0e1326; --surface2:#141a30; --line:#222a45;
+    --ink:#eef1f8; --muted:#9aa7c4; --accent:#7c8bff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:Inter,system-ui,Segoe UI,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+  /* halos */
+  .halo{position:fixed;border-radius:50%;filter:blur(120px);opacity:.5;z-index:0;pointer-events:none}
+  .h1{top:-160px;right:-120px;width:520px;height:520px;background:radial-gradient(circle,#5b4bff55,transparent 70%)}
+  .h2{top:40%;left:-180px;width:480px;height:480px;background:radial-gradient(circle,#13c5b933,transparent 70%)}
+  .h3{bottom:-160px;right:10%;width:420px;height:420px;background:radial-gradient(circle,#ff8a4d22,transparent 70%)}
+
+  header,main,footer{position:relative;z-index:1}
+
+  /* topbar */
+  .top{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.02em}
+  .logo{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(135deg,#7c8bff,#2bd4d4);color:#0a0e1f;box-shadow:0 8px 30px -8px #7c8bff88}
+  .brand small{display:block;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .top a.back{font-size:13px;color:var(--muted);border:1px solid var(--line);padding:9px 15px;border-radius:10px;transition:.2s}
+  .top a.back:hover{color:var(--ink);border-color:var(--accent)}
+
+  /* hero */
+  .hero{padding:46px 0 30px;text-align:center}
+  .pill{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:#c5cdff;border:1px solid #3a3f7a;background:#161a3a55;padding:7px 14px;border-radius:999px}
+  .pill .dot{width:7px;height:7px;border-radius:50%;background:#7c8bff;box-shadow:0 0 12px #7c8bff}
+  h1{font-size:clamp(34px,6vw,62px);line-height:1.05;font-weight:900;letter-spacing:-.03em;margin:20px 0 0}
+  h1 .grad{background:linear-gradient(120deg,#9aa6ff,#2bd4d4 55%,#ffae73);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .sub{max-width:680px;margin:18px auto 0;color:var(--muted);font-size:clamp(15px,2.2vw,18px);line-height:1.6}
+  .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+  .btn{padding:13px 22px;border-radius:12px;font-weight:600;font-size:14.5px;transition:.2s;border:1px solid transparent;cursor:pointer}
+  .btn.primary{background:linear-gradient(135deg,#7c8bff,#6a78ff);color:#0a0e1f;box-shadow:0 14px 34px -12px #7c8bffaa}
+  .btn.primary:hover{filter:brightness(1.08);transform:translateY(-2px)}
+  .btn.ghost{border-color:var(--line);color:var(--ink)}
+  .btn.ghost:hover{border-color:var(--accent);background:#141a30}
+  .stats{display:flex;gap:34px;justify-content:center;flex-wrap:wrap;margin-top:34px;color:var(--muted);font-size:13.5px}
+  .stats b{color:var(--ink);font-weight:800;font-size:20px;display:block}
+
+  /* cycle */
+  .section-h{text-align:center;margin:64px 0 8px}
+  .section-h .k{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  .section-h h2{font-size:clamp(24px,4vw,34px);font-weight:800;letter-spacing:-.02em;margin-top:8px}
+  .section-h p{color:var(--muted);max-width:620px;margin:12px auto 0;font-size:15px;line-height:1.6}
+
+  .cycle{display:flex;align-items:stretch;gap:0;overflow-x:auto;padding:30px 4px 10px;scrollbar-width:none}
+  .cycle::-webkit-scrollbar{display:none}
+  .step{flex:1 0 auto;min-width:118px;text-align:center;position:relative;padding:0 6px}
+  .step .num{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;margin:0 auto;font-weight:800;font-size:15px;color:#0a0e1f;position:relative;z-index:2}
+  .step .lbl{margin-top:11px;font-weight:700;font-size:13.5px}
+  .step .app{margin-top:2px;font-size:11.5px;color:var(--muted)}
+  .step:not(:last-child)::after{content:"";position:absolute;top:20px;left:50%;width:100%;height:2px;background:linear-gradient(90deg,#2a3158,#2a3158);z-index:1}
+
+  /* grid */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:18px;margin-top:30px}
+  .card{position:relative;border:1px solid var(--line);background:linear-gradient(180deg,var(--surface),#0b1022);border-radius:20px;padding:24px;overflow:hidden;transition:.25s;opacity:0;transform:translateY(18px)}
+  .card.in{opacity:1;transform:none}
+  .card:hover{transform:translateY(-4px);border-color:var(--ac)}
+  .card::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--ac);opacity:.9}
+  .card .glow{position:absolute;top:-60px;right:-60px;width:160px;height:160px;border-radius:50%;background:var(--ac);opacity:.13;filter:blur(40px)}
+  .chead{display:flex;align-items:center;justify-content:space-between;position:relative}
+  .ic{width:48px;height:48px;border-radius:13px;display:grid;place-items:center;background:color-mix(in srgb,var(--ac) 16%,transparent);color:var(--ac)}
+  .ic svg{width:23px;height:23px}
+  .stage{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ac);border:1px solid color-mix(in srgb,var(--ac) 35%,transparent);padding:5px 9px;border-radius:999px}
+  .card h3{font-size:19px;font-weight:800;letter-spacing:-.01em;margin:16px 0 0}
+  .card .tag{color:var(--muted);font-size:12.5px;margin-top:1px}
+  .card p{color:#b9c2db;font-size:13.6px;line-height:1.55;margin-top:12px;min-height:62px}
+  .tech{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+  .tech span{font-size:11px;color:var(--muted);border:1px solid var(--line);background:#0c1124;padding:3px 9px;border-radius:7px}
+  .open{display:inline-flex;align-items:center;gap:7px;margin-top:18px;font-weight:700;font-size:13.5px;color:var(--ac)}
+  .open .arr{transition:.2s}
+  .card:hover .open .arr{transform:translateX(4px)}
+  .live{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:#7fe0b0;margin-left:auto}
+  .live .d{width:7px;height:7px;border-radius:50%;background:#34d399;box-shadow:0 0 10px #34d399}
+
+  /* note + footer */
+  .note{margin:46px auto 0;max-width:760px;text-align:center;color:var(--muted);font-size:12.5px;line-height:1.7;border:1px solid var(--line);background:#0b1022;border-radius:16px;padding:18px 22px}
+  footer{padding:46px 0 60px;text-align:center;color:var(--muted);font-size:13px}
+  footer a{color:var(--accent);font-weight:600}
+  footer .made{margin-top:8px;font-size:12px;opacity:.8}
+
+  @media(max-width:560px){.step{min-width:104px}.card p{min-height:auto}}
+</style>
+</head>
+<body>
+<div class="halo h1"></div><div class="halo h2"></div><div class="halo h3"></div>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><span class="logo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 1.9 4.8L19 9l-3.8 3 1 5.2L12 14.8 7.8 17.2l1-5.2L5 9l5.1-1.2z"/></svg></span>
+      <div>Digital Studio<small>Transformation digitale</small></div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <span class="pill"><span class="dot"></span> 7 prototypes · une seule démarche</span>
+    <h1>De l'idée à l'adoption,<br><span class="grad">tout le cycle de la transfo digitale</span></h1>
+    <p class="sub">Digital Studio réunit sept prototypes qui s'enchaînent comme les étapes d'un vrai projet de transformation digitale : faire émerger les idées, écouter les clients, maîtriser les données, choisir la bonne technologie, digitaliser, améliorer le parcours et réussir l'adoption.</p>
+    <div class="cta">
+      <a class="btn primary" href="#apps">Explorer les 7 apps</a>
+      <a class="btn ghost" href="#cycle">Découvrir la démarche</a>
+    </div>
+    <div class="stats">
+      <div><b>7</b> applications</div>
+      <div><b>100%</b> fonctionnelles</div>
+      <div><b>React</b> · TypeScript</div>
+      <div><b>0</b> donnée réelle</div>
+    </div>
+  </section>
+
+  <div class="section-h">
+    <div class="k">La démarche</div>
+    <h2>Un cycle, sept briques</h2>
+    <p>Chaque application traite une étape clé. Ensemble, elles racontent une méthode complète.</p>
+  </div>
+  <div class="cycle" id="cycle"></div>
+
+  <div class="section-h" id="apps">
+    <div class="k">Les applications</div>
+    <h2>Sept produits, sept usages</h2>
+    <p>Cliquez pour ouvrir chaque démonstration (mode démo, données simulées).</p>
+  </div>
+  <div class="grid" id="grid"></div>
+
+  <div class="note">
+    <strong>Mode démonstration.</strong> Chaque application fonctionne avec des données locales et simulées (LocalStorage), sans API payante ni données réelles. Les scores et recommandations sont des estimations pédagogiques destinées à un portfolio — ils ne remplacent pas une décision, un audit ou une expertise humaine.
+  </div>
+
+  <footer>
+    Conçu et développé par David Azoulay — élève-ingénieur ECE Lyon.
+    <div class="made">Digital Studio · <span id="y"></span> · React · TypeScript · Vite · Tailwind</div>
+  </footer>
+</div>
+
+<script>
+  // données des 7 apps (ordre = cycle)
+  const ICONS = {
+    bulb:'<path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/>',
+    wave:'<path d="M2 12h3l3-9 4 18 3-13 2 7h5"/>',
+    compass:'<circle cx="12" cy="12" r="10"/><polygon points="16.2 7.8 14.1 14.1 7.8 16.2 9.9 9.9"/>',
+    leaf:'<circle cx="12" cy="12" r="9"/><polygon points="16 8 10 10 8 16 14 14 16 8"/>',
+    flow:'<rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/>',
+    route:'<circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>',
+    pulse:'<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>'
+  };
+  const APPS = [
+    {stage:"Idée",lbl:"Faire émerger",name:"IdeaForge",tag:"Innovation Portfolio Studio",ac:"#b48bff",icon:"bulb",
+      desc:"Transforme une idée brute en fiche projet structurée : score de priorité, Innovation Canvas, matrices et simulateur de MVP.",tech:["React","TypeScript","Framer Motion"],url:"https://ideaforge-ecru.vercel.app"},
+    {stage:"Écoute",lbl:"Écouter",name:"VoicePulse",tag:"Customer Voice Intelligence",ac:"#a78bfa",icon:"wave",
+      desc:"Analyse les retours clients : sentiments, thèmes, irritants prioritaires, tendances et plan d'action.",tech:["React","TypeScript","Recharts"],url:"https://voicepulse-sable.vercel.app"},
+    {stage:"Données",lbl:"Cartographier",name:"DataCompass",tag:"Data Flow & Trust Studio",ac:"#2bd4d4",icon:"compass",
+      desc:"Cartographie les flux de données, repère les zones sensibles et les risques de gouvernance (carte interactive).",tech:["React","TypeScript","React Flow"],url:"https://datacompass-six.vercel.app"},
+    {stage:"Techno",lbl:"Choisir",name:"EcoPilot",tag:"AI & Digital Sustainability",ac:"#2ee0b0",icon:"leaf",
+      desc:"Compare des solutions d'IA et de digitalisation selon l'impact, le risque et la sobriété numérique.",tech:["React","TypeScript","Recharts"],url:"https://ecopilot-gamma.vercel.app"},
+    {stage:"Process",lbl:"Digitaliser",name:"FlowPilot",tag:"Digital Process Intelligence",ac:"#e08a4f",icon:"flow",
+      desc:"Analyse un processus métier et propose sa version digitalisée : irritants, gains et feuille de route.",tech:["React","TypeScript","Tailwind"],url:"https://flowpilot-ebon.vercel.app"},
+    {stage:"Parcours",lbl:"Améliorer",name:"JourneyLens",tag:"Customer Journey Intelligence",ac:"#9277ff",icon:"route",
+      desc:"Visualise un parcours client, détecte les frictions et conçoit la version optimisée (avant/après animé).",tech:["React","TypeScript","Recharts"],url:"https://journeylens.vercel.app"},
+    {stage:"Adoption",lbl:"Faire adopter",name:"ChangePulse",tag:"Digital Change Readiness",ac:"#8b87f5",icon:"pulse",
+      desc:"Évalue la préparation des équipes au changement, les freins à l'adoption et construit un plan d'accompagnement.",tech:["React","TypeScript","Framer Motion"],url:"https://changepulse.vercel.app"}
+  ];
+
+  const cycle = document.getElementById('cycle');
+  cycle.innerHTML = APPS.map((a,i)=>`<div class="step"><div class="num" style="background:${a.ac}">${i+1}</div><div class="lbl">${a.lbl}</div><div class="app">${a.name}</div></div>`).join('');
+
+  const grid = document.getElementById('grid');
+  grid.innerHTML = APPS.map((a,i)=>`
+    <a class="card" style="--ac:${a.ac}" href="${a.url}" target="_blank" rel="noopener" data-i="${i}">
+      <span class="glow"></span>
+      <div class="chead">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICONS[a.icon]}</svg></span>
+        <span class="stage">${i+1} · ${a.stage}</span>
+      </div>
+      <h3>${a.name}</h3>
+      <div class="tag">${a.tag}</div>
+      <p>${a.desc}</p>
+      <div class="tech">${a.tech.map(t=>`<span>${t}</span>`).join('')}</div>
+      <span class="open">Ouvrir l'application <span class="arr">→</span><span class="live"><span class="d"></span>en ligne</span></span>
+    </a>`).join('');
+
+  // reveal
+  const io = new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('in'), (e.target.dataset.i%4)*70);io.unobserve(e.target)}}),{threshold:.15});
+  document.querySelectorAll('.card').forEach(c=>io.observe(c));
+  document.getElementById('y').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
